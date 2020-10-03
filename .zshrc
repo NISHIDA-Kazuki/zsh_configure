@@ -11,9 +11,6 @@ HIST_STAMPS="mm/dd/yyyy"
 # 標準エディタの設定
 export EDITOR=emacs
 
-plugins=(brew brew-cask cdd gem git rbenv vagrant)
-#source $ZSH/oh-my-zsh.sh
-
 export PATH="/usr/local/bin:$PATH"
 
 autoload -Uz colors && colors # 色を使用できるようにする
@@ -89,6 +86,14 @@ zstyle ':zle:*' word-chars word-style unspecified
 fpath=(/path/to/homebrew/share/zsh-completion $fpath)
 autoload -U compinit
 compinit -u
+
+# 薄い色で直近の履歴を表示させる
+#source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# 自分で入力したコマンドに色をつける
+#source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # aliased ls needs if file/dir completions work
 setopt complete_aliases
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps のあとでプロセス名を補完できるようにする
@@ -96,7 +101,9 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args' # ps のあとで�
 zstyle ':completion:*' completer _complete _match _approximate _history _prefix
 zstyle ':completion:*' group-name ''
 #zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# 補完候補をカラー表示
 zstyle ':completion:*' list-colors "${LS_COLORS}"
+# 補完で小文字と大文字の違いを無視する
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*' verbose yes
